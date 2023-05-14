@@ -1,0 +1,41 @@
+[
+    {
+        "name": "front",
+        "image": "hatimsue/express_start",
+        "cpu": 0,
+        "portMappings": [
+            {
+                "name": "express-3000-tcp",
+                "containerPort": 3000,
+                "hostPort": 3000,
+                "protocol": "tcp",
+                "appProtocol": "http"
+            }
+        ],
+        "essential": true,
+        "environment": [],
+        "environmentFiles": [],
+        "mountPoints": [],
+        "volumesFrom": [],
+        "ulimits": [],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/front",
+                "awslogs-create-group": "true",
+                "awslogs-region": "us-east-1",
+                "awslogs-stream-prefix": "ecs"
+            }
+        },
+        "healthCheck": {
+            "command": [
+                "CMD-SHELL",
+                "curl localhost:3000 || exit 1"
+            ],
+            "interval": 20,
+            "timeout": 5,
+            "retries": 3,
+            "startPeriod": 60
+        }
+    }
+]
